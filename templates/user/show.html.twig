@@ -1,0 +1,46 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+     <table border="1">
+         <thead>
+         <th>Username</th>
+         <th>Nom </th>
+         <th>Prenom</th>
+         <th>Adresse </th>
+         <th>Email </th>
+         <th>Numero </th>
+         <th> Modification</th>
+         <th> supression </th>
+         </thead>
+         <tbody>
+         {%  for t in user %}
+             <tr>
+                 <td>{{ t.username }}</td>
+                 <td> {{ t.nom }} </td>
+                 <td> {{ t.prenom }} </td>
+                 <td> {{ t.adresse }} </td>
+                 <td> {{ t.email }} </td>
+                 <td> {{ t.num }}</td>
+                 <td>
+                     <a href="{{ path('modifier_user',{'id':t.id}) }}">Modifier</a>
+                 </td>
+                 <td>
+                     <a href="{{ path('supp_user',{'id':t.id}) }}">supprimer</a>
+                 </td>
+
+
+             </tr>
+         {% endfor %}
+         </tbody>
+     </table>
+ </div>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% block body %}
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+{{ form_errors(form.titre) }}
+{{ form_label(form.titre,"nom du cours") }}
+{{ form_widget(form.titre)}}
+{{ form_errors(form.nome) }}
+{{ form_label(form.nome,"nom de l'entraineur") }}
+{{ form_widget(form.nome)}}
+{{ form_errors(form.type) }}
+{{ form_label(form.type,"type") }}
+{{ form_widget(form.type)}}
+{{ form_errors(form.imc) }}
+{{ form_label(form.imc,"valeur") }}
+{{ form_widget(form.imc)}}
+{{ form_errors(form.nbHeure) }}
+{{ form_label(form.nbHeure,"nbHeure") }}
+{{ form_widget(form.nbHeure)}}
+{{ form_end(form) }}
+{% endblock %}

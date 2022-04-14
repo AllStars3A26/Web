@@ -1,0 +1,20 @@
+{% block body %}
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+{{ form_errors(form.dateSeance) }}
+{{ form_label(form.dateSeance,"date de la séance") }}
+{{ form_widget(form.dateSeance)}}
+{{ form_errors(form.heureSeance) }}
+{{ form_label(form.heureSeance,"heure de la séance") }}
+{{ form_widget(form.heureSeance)}}
+{{ form_errors(form.nomT) }}
+{{ form_label(form.nomT,"nom de la séance") }}
+{{ form_widget(form.nomT)}}
+{{ form_errors(form.nomE) }}
+{{ form_label(form.nomE,"nom de l'entraineur") }}
+{{ form_widget(form.nomE)}}
+{{ form_errors(form.nbParticipants) }}
+{{ form_label(form.nbParticipants,"nbParticipants") }}
+{{ form_widget(form.nbParticipants)}}
+{{ form_end(form) }}
+{% endblock %}

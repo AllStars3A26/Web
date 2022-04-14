@@ -1,0 +1,27 @@
+  {%extends 'base-back.html.twig'%}
+{%block body%}
+  <table border="1"> 
+   <tr>
+        <td>Nom du cours</td>
+        <td>Nom de l'entraineur</td>
+        <td>Type</td>
+        <td>Valeur</td>
+        <td>nombre d'heure  </td>
+    </tr>
+    {% for c in Cours %}
+        <tr>
+            <td>{{ c.titre }}</td>
+            <td>{{ c.nome }}</td>
+            <td>{{ c.type }}</td>
+            <td>{{ c.imc }}</td>
+            <td>{{ c.nbHeure}}</td>
+             
+           
+            <td> <a href="{{ path('supprimerCours',{'id':c.idCours}) }}">Delete</a> </td>
+            <td> <a href="{{ path('modifierCours',{'id':c.idCours}) }}">Modifier</a> </td>
+            <td> <a href="{{ path('AfficherSeance',{'id':c.idCours}) }}">Afficher les séances relatives à ce cours</a> </td>
+            <td> <a href="{{ path('ajouterSeance',{'id':c.idCours}) }}">Ajouter une séance à ce cours</a> </td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

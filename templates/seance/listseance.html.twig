@@ -1,0 +1,24 @@
+ <table border="1"> 
+   <tr>
+        <td>Date de la séance</td>
+        <td>heure de la séance</td>
+        <td>Nom de la séance</td>
+        <td>nombre de participants</td>
+        <td>nom de l'entraineur  </td>
+    </tr>
+    {% for c in Seances %}
+        <tr>
+            <td>{{ c.dateSeance|date('d M Y') }}</td>
+            <td>{{ c.heureSeance }}</td>
+            <td>{{ c.nomT }}</td>
+            <td>{{ c.nbParticipants }}</td>
+            <td>{{ c.nomE}}</td>
+  <td> <a href="{{ path('supprimerSeance',{'id':c.idSeance}) }}">Delete</a> </td>
+            <td> <a href="{{ path('modifierSeance',{'id':c.idSeance}) }}">Modifier</a> </td>
+                    </tr>
+    {% endfor %}
+</table>
+             
+           
+     
+         

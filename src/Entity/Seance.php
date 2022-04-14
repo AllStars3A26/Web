@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Seance
@@ -13,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  
  */
 class Seance
+
 {
     /**
      * @var int
@@ -27,40 +27,26 @@ class Seance
      * @var \DateTime
      *
      * @ORM\Column(name="date_seance", type="date", nullable=false)
-     * @Assert\GreaterThanOrEqual("today")
      */
     private $dateSeance;
 
-     /**
-     * @Assert\Time
-     * @var string A "H:i:s" formatted value
+    /**
+     * @var string
      *
      * @ORM\Column(name="heure_seance", type="string", length=20, nullable=false)
-     * 
      */
     private $heureSeance;
 
     /**
      * @var string
-     *@Assert\NotBlank(message="Le titre de la séance est obligatoire")
-     *@Assert\Regex(
-     *     pattern="/\d/",
-     *     match=false,
-     *     message="Le titre de la séance doit etre composé de lettres seulement"
-     * )
-     
+     *
      * @ORM\Column(name="nom_T", type="string", length=20, nullable=false)
      */
     private $nomT;
 
     /**
      * @var string
-      *@Assert\NotBlank(message="Le nom de l'entraineur est obligatoire")
-     *@Assert\Regex(
-     *     pattern="/\d/",
-     *     match=false,
-     *     message="Le nom de l'entraineur doit etre composé de lettres seulement"
-     * )
+     *
      * @ORM\Column(name="nom_E", type="string", length=20, nullable=false)
      */
     private $nomE;

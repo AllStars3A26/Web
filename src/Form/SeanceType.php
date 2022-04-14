@@ -8,7 +8,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class SeanceType extends AbstractType
 {
@@ -19,7 +18,7 @@ class SeanceType extends AbstractType
             ->add('heureSeance')
             ->add('nomT')
             ->add('nomE')
-            
+            ->add('nbParticipants')
             
         ;
     }

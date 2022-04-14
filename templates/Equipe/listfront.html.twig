@@ -1,0 +1,25 @@
+{% extends 'basefront.html.twig' %}
+{% block body %}
+    <table border="1">
+        <tr>
+            <td>Nom d'équipe</td>
+            <td>type</td>
+            <td>description</td>
+            <td>mail </td>
+            <td>nombre de joueur </td>
+        </tr>
+        {% for E in Equipe %}
+            <tr>
+                <td>{{ E.nomEquipe }}</td>
+                <td>{{ E.typeEquipe }}</td>
+                <td>{{ E.descriptionEquipe }}</td>
+                <td>{{ E.mailEquipe }}</td>
+                <td>{{ E.nbreJoueur}}</td>
+
+
+
+
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

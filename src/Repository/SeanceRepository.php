@@ -80,10 +80,10 @@ $listeSeances = $repository->findByidcours($valeur);
         
         
     }*/
-    public function findOneBycoursCp($id)
+    public function findOneBycourscp($id)
     {
         return $this->getEntityManager()
-            ->createQuery('SELECT s FROM App:seance s where s->coursCp = :id' )
+            ->createQuery('SELECT s FROM App:seance s where s.courCp = :id' )
             ->setParameter('id', $id)
             ->getResult();
     }

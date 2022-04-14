@@ -34,7 +34,7 @@ class SeanceController extends AbstractController
      */
     public function AfficherSeance( $id)
     {
-        $Seance = $this->getDoctrine()->getRepository(Seance::class)->findOneBycoursCp($id);
+        $Seance = $this->getDoctrine()->getRepository(Seance::class)->findOneBycourscp($id);
       
         return $this->render('seance/listseance.html.twig', ["Seances" => $Seance]);
     }
@@ -84,7 +84,7 @@ class SeanceController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('listFonction');
         }
-        return $this->render("Seance/modifierSeance.html.twig", array('form' => $form->createView()));
+        return $this->render("Seance/modifier.html.twig", array('form' => $form->createView()));
     }
 
 }

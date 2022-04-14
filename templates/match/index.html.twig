@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}News index{% endblock %}
+
+{% block body %}
+<h1>Liste des matchs</h1>
+
+<a href="{{ path('ajouter_match') }}" class="btn btn-sm btn-warning">
+    ajouter match
+</a>
+<br> <br>
+<table class="table table-info">
+
+    <tr>
+        <th>IdMatch</th>
+        <th>Equipe1</th>
+        <th>Equipe2</th>
+        <th>Date</th>
+        <th>Resultat</th>
+    </tr>
+    {% for match in matchs %}
+        <tr>
+            <td>{{ match.idMatch }}</td>
+            <td>{{ match.idEquipe1 }}</td>
+            <td>{{ match.idEquipe2 }}</td>
+            <td>{{ match.DateMatch |date('Y-m-d')  }}</td>
+            <td>{{ match.ResultatMatch }}</td>
+            <td>
+                <a href="{{ path('supprimer_match', {'id': match.idMatch}) }}">
+                    <button class="btn btn-sm btn-outline-danger">delete</button>
+                </a>
+                &nbsp
+                <a href="{{ path('modifier_match', {'id': match.idMatch}) }}">
+                    <button class="btn btn-sm btn-outline-primary">Update</button>
+                </a>
+            </td>
+
+        </tr>
+    {% endfor %}
+
+</table>
+{% endblock %}

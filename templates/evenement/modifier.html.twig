@@ -1,0 +1,12 @@
+{% extends 'basegeneral.html.twig' %}
+{% block body %}
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+{{ form_errors(form.libelle) }}
+{{ form_label(form.libelle,"nom du evenement") }}
+{{ form_widget(form.libelle)}}
+{{ form_errors(form.type) }}
+{{ form_label(form.type,"type") }}
+{{ form_widget(form.type)}}
+{{ form_end(form) }}
+{% endblock %}

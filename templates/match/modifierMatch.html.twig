@@ -1,0 +1,13 @@
+{% extends 'basegeneral.html.twig' %}
+
+{% block title %}Edit Match{% endblock %}
+
+{% block body %}
+    <h1>Edit Match</h1>
+
+    {{ include('match/_form.html.twig') }}
+
+    <a href="{{ path('afficher_match') }}">back to list</a>
+
+
+{% endblock %}

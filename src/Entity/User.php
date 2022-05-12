@@ -10,8 +10,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\Table(name="user", indexes={@ORM\Index(columns={"psudo"}, flags={"fulltext"})})
  * @UniqueEntity(fields="email", message="Email already taken")
- * @UniqueEntity(fields="username", message="Username already taken")
+ * @UniqueEntity(fields="psudo", message="Username already taken")
  */
 class User implements UserInterface
 {
@@ -23,27 +24,31 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @Assert\NotBlank(message=" nom doit etre non vide")
-     * @Assert\Length(
-     *      min = 3,
-     *      minMessage=" Entrer un nom au mini de 3 caracteres"
-     *
-     *     )
-     * @ORM\Column(type="string", length=255)
-     *
+     * @ORM\Column(type="string", length=180, unique=true)
      */
-    private $nom;
+    private $email;
 
     /**
-     * @Assert\NotBlank(message=" prenom doit etre non vide")
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $roles = [];
+
+    /**
+     * @var string The hashed password
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $password;
+
+    /**
+     * @Assert\NotBlank(message=" full doit etre non vide")
      * @Assert\Length(
      *      min = 4,
      *      minMessage=" Entrer un titre au mini de 4 caracteres"
      *
      *     )
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $prenom;
+    private $fullname;
 
     /**
      * @Assert\NotBlank(message="Adresse  doit etre non vide")
@@ -52,42 +57,24 @@ class User implements UserInterface
      *      max = 100,
      *      minMessage = "doit etre >=7 ",
      *      maxMessage = "doit etre <=100" )
-     * @ORM\Column(type="string", length=300)
+     * @ORM\Column(type="string", length=300, nullable=true)
      */
     private $adresse;
 
     /**
-     * @Assert\NotBlank(message="Adresse  doit etre non vide")
-     * @ORM\Column(type="string", length=300, unique=true)
+     * @Assert\Length(
+     *      min = 8,
+     *      max = 8,
+     *      minMessage = "doit etre =8 ",
+     *      maxMessage = "doit etre =8" )
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $email;
+    private $num;
 
     /**
-     * @Assert\NotBlank(message="Adresse  doit etre non vide")
-     * @ORM\Column(type="string", length=150, unique=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $username;
-
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Length(max=4096)
-     */
-    private $plainPassword;
-
-    /**
-     * The below length depends on the "algorithm" you use for encoding
-     * the password, but this works well with bcrypt.
-     *
-     * @ORM\Column(type="string", length=64)
-     */
-    private $password;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $role;
-
-
+    private $image;
 
     /**
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"}, nullable=true)
@@ -107,59 +94,134 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="date", nullable=true)
      */
-    private $date_contract_e;
+    private $date_e;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $dure_contract_e;
-
-
-    /**
-     * @Assert\Length(
-     *      min = 8,
-     *      max = 8,
-     *      minMessage = "doit etre =8 ",
-     *      maxMessage = "doit etre =8" )
-     * @ORM\Column(type="string", length=255)
-     */
-    private $num;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $image;
+    private $dure_e;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $code;
 
+    /**
+     * @Assert\NotBlank(message="Adresse  doit etre non vide")
+     * @ORM\Column(type="string", length=150, unique=true)
+     */
+    private $psudo;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $token;
+
+    /**
+     * @return mixed
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param mixed $token
+     */
+    public function setToken($token): void
+    {
+        $this->token = $token;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getEmail(): ?string
     {
-        return $this->nom;
+        return $this->email;
     }
 
-    public function setNom(string $nom): self
+    public function setEmail(string $email): self
     {
-        $this->nom = $nom;
+        $this->email = $email;
 
         return $this;
     }
 
-    public function getPrenom(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
     {
-        return $this->prenom;
+        return (string) $this->email;
     }
 
-    public function setPrenom(string $prenom): self
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
     {
-        $this->prenom = $prenom;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
+    {
+        return (string)$this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    public function getFullname(): ?string
+    {
+        return $this->fullname;
+    }
+
+    public function setFullname(string $fullname): self
+    {
+        $this->fullname = $fullname;
 
         return $this;
     }
@@ -176,56 +238,26 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getNum(): ?string
     {
-        return $this->email;
+        return $this->num;
     }
 
-    public function setEmail(string $email): self
+    public function setNum(string $num): self
     {
-        $this->email = $email;
+        $this->num = $num;
 
         return $this;
     }
 
-    public function getUsername()
+    public function getImage(): ?string
     {
-        return $this->username;
+        return $this->image;
     }
 
-    public function setUsername($username)
+    public function setImage(?string $image): self
     {
-        $this->username = $username;
-    }
-
-    public function getPlainPassword()
-    {
-        return $this->plainPassword;
-    }
-
-    public function setPlainPassword($password)
-    {
-        $this->plainPassword = $password;
-    }
-
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    public function setPassword($password)
-    {
-        $this->password = $password;
-    }
-
-    public function getRole(): ?int
-    {
-        return $this->role;
-    }
-
-    public function setRole(int $role): self
-    {
-        $this->role = $role;
+        $this->image = $image;
 
         return $this;
     }
@@ -235,7 +267,7 @@ class User implements UserInterface
         return $this->date_inscrit_u;
     }
 
-    public function setDateInscritU(\DateTimeInterface $date_inscrit_u): self
+    public function setDateInscritU(?\DateTimeInterface $date_inscrit_u): self
     {
         $this->date_inscrit_u = $date_inscrit_u;
 
@@ -266,50 +298,26 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getDateContractE(): ?\DateTimeInterface
+    public function getDateE(): ?\DateTimeInterface
     {
-        return $this->date_contract_e;
+        return $this->date_e;
     }
 
-    public function setDateContractE(?\DateTimeInterface $date_contract_e): self
+    public function setDateE(?\DateTimeInterface $date_e): self
     {
-        $this->date_contract_e = $date_contract_e;
+        $this->date_e = $date_e;
 
         return $this;
     }
 
-    public function getDureContractE(): ?int
+    public function getDureE(): ?int
     {
-        return $this->dure_contract_e;
+        return $this->dure_e;
     }
 
-    public function setDureContractE(?int $dure_contract_e): self
+    public function setDureE(?int $dure_e): self
     {
-        $this->dure_contract_e = $dure_contract_e;
-
-        return $this;
-    }
-
-    public function getNum(): ?string
-    {
-        return $this->num;
-    }
-
-    public function setNum(string $num): self
-    {
-        $this->num = $num;
-
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): self
-    {
-        $this->image = $image;
+        $this->dure_e = $dure_e;
 
         return $this;
     }
@@ -325,17 +333,16 @@ class User implements UserInterface
 
         return $this;
     }
-    public function getSalt()
+
+    public function getPsudo(): ?string
     {
-        // The bcrypt and argon2i algorithms don't require a separate salt.
-        // You *may* need a real salt if you choose a different encoder.
-        return null;
+        return $this->psudo;
     }
-    public function eraseCredentials()
+
+    public function setPsudo(string $psudo): self
     {
-    }
-    public function getRoles()
-    {
-        return $this->roles;
+        $this->psudo = $psudo;
+
+        return $this;
     }
 }

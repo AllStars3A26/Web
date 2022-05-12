@@ -1,0 +1,30 @@
+{% extends 'basegeneral.html.twig' %}
+{% block body %}
+<table border="1">
+   <tr>
+
+        <td>prix</td>
+        <td>libelle</td>
+        <td>Type</td>
+
+
+    </tr>
+    {% for c in Ticket %}
+        <tr>
+            <td>{{ c.prix }}</td>
+            <td>{{ c.libelle }}</td>
+            <td>{{ c.type}}</td>
+            
+            
+             
+           
+            <td> <a href="{{ path('supprimerTicket',{'id':c.id}) }}">Delete</a> </td>
+            <td> <a href="{{ path('modifierTicket',{'id':c.id}) }}">Modifier</a> </td>
+            <td> <a href="{{ path('ajouterTicket',{'id':c.id}) }}">Ajouter une ticket</a> </td>
+            <td>
+                <a href="{{ path('pdfbox') }}"class="btn btn-primary">Save As PDF</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

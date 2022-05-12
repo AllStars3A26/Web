@@ -1,0 +1,23 @@
+{% extends 'basegeneral.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+{{ form_errors(form.nomEquipe) }}
+{{ form_label(form.nomEquipe,"nom d'equipe") }}
+{{ form_widget(form.nomEquipe)}}
+{{ form_errors(form.typeEquipe) }}
+{{ form_label(form.typeEquipe,"type") }}
+{{ form_widget(form.typeEquipe)}}
+{{ form_errors(form.descriptionEquipe) }}
+{{ form_label(form.descriptionEquipe,"description") }}
+{{ form_widget(form.descriptionEquipe)}}
+{{ form_errors(form.mailEquipe) }}
+{{ form_label(form.mailEquipe,"mail") }}
+{{ form_widget(form.mailEquipe)}}
+{{ form_errors(form.nbreJoueur) }}
+{{ form_label(form.nbreJoueur,"nombre de joueur") }}
+{{ form_widget(form.nbreJoueur)}}
+{{ form_end(form) }}
+{% endblock %}

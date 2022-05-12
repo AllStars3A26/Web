@@ -73,4 +73,26 @@ class CoursRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findEntitiesByString($str)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT p FROM App:Cours p WHERE p.titre LIKE :str or p.nome LIKE :str or p.type LIKE :str ' )
+            ->setParameter('str', '%'.$str.'%')->getResult();
+    }
+ /*   public function findOneByTitre($str)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT p FROM App:Cours p WHERE p.titre=:str  ' )
+            ->setParameter('str', '%'.$str.'%')->getResult();
+            
+    }*/
+    public function findOneByTitre($value): ?Cours
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.titre = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }

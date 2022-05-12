@@ -1,0 +1,52 @@
+
+<style>
+    #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width:50px;
+    }
+    #customers td, #customers th {
+        border: 1px solid #ddd;
+        padding: 3px;
+    }
+    #customers tr:nth-child(even){background-color: #f2f2f2;}
+    #customers tr:hover {background-color: #ddd;}
+    #customers th {
+        padding-top: 3px;
+        padding-bottom: 3px;
+        text-align: left;
+        background-color: #04AA6D;
+        color: white;
+    }
+</style>
+
+<table id="customers">
+
+    <tr>
+
+
+        <th scope="row">Id</th>
+        <th scope="row">Full name</th>
+        <th scope="row">Email signed with</th>
+        <th scope="row">Adresse </th>
+        <th scope="row">Numero</th>
+
+
+    </tr>
+
+    {% for Recuperation in Recuperations %}
+
+        <tr>
+            <td>{{ Recuperation.id }}</td>
+            <td>{{ Recuperation.fullname }}</td>
+            <td>{{ Recuperation.email }}</td>
+            <td>{{ Recuperation.adresse }}</td>
+            <td>{{ Recuperation.num}}</td>
+
+
+
+        </tr>
+
+    {% endfor %}
+
+</table>

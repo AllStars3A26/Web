@@ -1,0 +1,59 @@
+
+{#{{ form_start(form,{'attr': {'novalidate':'novalidate'}})}}#}
+{#    {{ form_widget(form) }}#}
+{#    <button class="btn">{{ button_label|default('Save') }}</button>#}
+{#{{ form_end(form) }}#}
+
+{{ form_start(form, {
+    'attr':{
+        'novalidate':'novalidate'
+    }
+}) }}
+
+<div class="form-group">
+    <label>
+        Equipe 1
+    </label>
+    {{ form_row(form.idEquipe1,{'attr':{'class':'form-control'}}) }}
+
+</div>
+<div class="form-group">
+    <label>
+        Equipe 2
+    </label>
+    {{ form_widget(form.idEquipe2,{'attr':{'class':'form-control'}}) }}
+</div>
+<label>
+    Date
+</label>
+<div class="form-group row">
+
+
+    <div class="col-sm-3">
+        {{ form_row(form.dateMatch,{'attr':{'class':'form-control'}}) }}
+    </div>
+
+
+</div>
+{#<div class="col-sm">#}
+{#    Resultat#}
+
+{#</div>#}
+
+<div class="form-group">
+    <label>
+       Resultat
+    </label>
+    {{ form_row(form.resultatMatch,{'attr':{'class':'form-control'}}) }}
+    {{ form_errors(form.resultatMatch) }}
+</div>
+<div class="form-group">
+    <label>
+       Tournoi
+    </label>
+    {{ form_widget(form.idTournoi,{'attr':{'class':'form-control'}}) }}
+</div>
+
+{{ form_widget(form.save,{'attr':{'class':'btn btn-sm btn-success'}}) }}
+
+    {{ form_end(form) }}

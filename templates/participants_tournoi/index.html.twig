@@ -1,0 +1,40 @@
+{% extends 'basegeneral.html.twig' %}
+
+{% block title %}Participant index{% endblock %}
+
+{% block body %}
+    <h1>Participant index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>IdParticipant</th>
+            <th>IdTournoi</th>
+            <th>IdEquipe</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for tournoi in ptournois %}
+            <tr>
+                <td>{{ tournoi.idParticipant }}</td>
+                <td>{{ tournoi.IdTournoi }}</td>
+
+                <td>{{ tournoi.IdEquipe }}</td>
+
+
+                <td>
+                    <a href="{{ path('supprimer_ptournoi', {'id': tournoi.idTournoi}) }}">supprimer</a>
+                    <a href="{{ path('modifier_ptournoi', {'id': tournoi.idTournoi}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="16">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('ajouter_ptournoi') }}">Create new</a>
+{% endblock %}

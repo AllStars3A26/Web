@@ -1,0 +1,76 @@
+{% extends 'basegeneral.html.twig' %}
+{% block body %}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title"><b>Modifier un terrain<b></h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+
+                {{ form_start(formTerrainM,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+                <div class="card-body">
+                  
+                 
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Nom du terrain </label>
+                    {{ form_widget(formTerrainM.NomTerrain) }}
+                    {{ form_errors(formTerrainM.NomTerrain, {'attr': {"class":"mb-0"}}) }}
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Type du terrain </label>
+                    {{ form_widget(formTerrainM.TypeTerrain) }}
+                    {{ form_errors(formTerrainM.TypeTerrain, {'attr': {"class":"mb-0"}}) }}
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Description du terrain </label>
+                    {{ form_widget(formTerrainM.DescriptionTerrain, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(formTerrainM.DescriptionTerrain, {'attr': {"class":"mb-0"}}) }}
+                  </div>
+                   <div class="form-group">
+                    <label for="exampleInputPassword1">Adresse du terrain </label>
+                    {{ form_widget(formTerrainM.AdresseTerrain, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(formTerrainM.AdresseTerrain, {'attr': {"class":"mb-0"}}) }}
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Disponibilite (1:oui , 0:non)</label>
+                    {{ form_widget(formTerrainM.Disponibilite, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(formTerrainM.Disponibilite, {'attr': {"class":"mb-0"}}) }}
+                  </div>
+                  
+               
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                 {{ form_widget(formTerrainM.Modifier, {'attr': {'class': 'btn btn-primary'}}) }}
+                </div>
+             {{ form_end(formTerrainM) }}
+            </div>
+            <!-- /.card -->
+
+          
+
+          </div>
+
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
+{% endblock %}
+
+

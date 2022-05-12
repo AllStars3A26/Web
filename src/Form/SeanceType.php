@@ -20,7 +20,6 @@ class SeanceType extends AbstractType
             ->add('nomT')
             ->add('nomE')
             
-            
         ;
     }
 

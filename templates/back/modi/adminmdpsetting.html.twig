@@ -1,0 +1,66 @@
+
+{% block header %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up Form by Colorlib</title>
+{% endblock %}
+
+{% block stylesheets %}
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{{ asset('Registration/fonts/material-icon/css/material-design-iconic-font.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('Registration/vendor/nouislider/nouislider.min.css') }}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{{ asset('Registration/css/style.css') }}">
+{% endblock %}
+
+        {% block javascripts %}
+            <script src="{{ asset('Registration/vendor/jquery/jquery.min.js') }}"></script>
+            <script src="{{ asset('Registration/vendor/nouislider/nouislider.min.js') }}"></script>
+            <script src="{{ asset('Registration/vendor/wnumb/wNumb.js') }}"></script>
+            <script src="{{ asset('Registration/vendor/jquery-validation/dist/jquery.validate.min.js') }}"></script>
+            <script src="{{ asset('Registration/vendor/jquery-validation/dist/additional-methods.min.js') }}"></script>
+            <script src="{{ asset('Registration/js/main.js') }}"></script>
+        {% endblock %}
+{% block body %}
+    <div class="main">
+
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-img">
+                    <img src="{{ asset('Registration/images/form-img.jpg') }}" alt="">
+                    <div class="signup-img-content">
+                        <h2>Settings profile </h2>
+                    </div>
+                </div>
+                <div class="signup-form">
+                    <form method="POST" class="register-form" id="register-form">
+                        {{ form_start(f,{attr:{novalidate:'novalidate'}}) }}
+                        <div class="form-row">
+                            <div class="form-group">
+
+                                <div class="form-input">
+                                    <label for="phone_number" class="required">Password</label>
+                                    {{ form_widget(f.password.first,{'attr':{'class':'form-control'}}) }}
+                                </div>
+                                {{ form_errors(f.password.first,{'attr':{'class':'text-danger'}}) }}
+                                <div class="form-input">
+                                    <label for="phone_number" class="required">Confirme Password</label>
+                                    {{ form_widget(f.password.second,{'attr':{'class':'form-control'}}) }}
+                                </div>
+                                {{ form_errors(f.password.second,{'attr':{'class':'text-danger'}}) }}
+
+                                <div class="col-sm-10" style="display: flex;align-items: center;justify-content: center">
+                                    <input type="submit" value="modifier" class="submit" id="submit" name="modifier" />
+                                </div>
+                            </div>
+
+
+                            {{ form_end(f) }}
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

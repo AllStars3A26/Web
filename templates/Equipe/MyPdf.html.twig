@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>List des Equipes</title>
+</head>
+
+<center>           <table border="5" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                
+                                                <th>Nom Equipe</th>
+                                                <th>typeEquipe</th>
+                                                <th>description </th>
+                                                <th>mailEquipe </th>
+                                                <th>nbreJoueur </th>
+                                                
+                                              
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+
+{% for E in Equipe %}
+<tr>
+    <td><H2>{{  E.nomEquipe}}</H2></td>
+    <td><H4>{{  E.typeEquipe }}</H4></td>
+    <td><H4>{{  E.descriptionEquipe }}</H4></td>
+    <td><H4>{{  E.mailEquipe }}</H4></td>
+    <td><H4>{{  E.nbreJoueur }}</H4></td>
+</tr>
+    {% endfor %}
+
+
+</tbody>
+</table>
+</center>
+</html>

@@ -1,0 +1,25 @@
+{% extends 'basefront.html.twig' %}
+<table border="1">
+    <tr>
+        <td>id du ticket</td>
+        <td>libelle</td>
+        <td>Type</td>
+        <td>prix</td>
+        <td>date  </td>
+        <td>
+            print
+        </td>
+    </tr>
+    {% for c in Ticket %}
+        <tr>
+            <td>{{ c.prix }}</td>
+            <td>{{ c.libelle }}</td>
+            <td>{{ c.type}}</td>
+
+
+
+
+
+        </tr>
+    {% endfor %}
+</table>

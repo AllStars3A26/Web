@@ -1,0 +1,62 @@
+{{ form_start(form,{
+    'attr':{
+        'novalidate':'novalidate'
+    }
+}) }}
+
+<div class="form-group">
+    <label>
+        Nom tournoi
+    </label>
+    {{ form_widget(form.nomTournoi,{'attr':{'class':'form-control'}}) }}
+    {{ form_errors(form.nomTournoi) }}
+</div>
+<div class="form-group">
+    <label>
+        Nombre maximale
+    </label>
+    {{ form_widget(form.nbParticipants) }}
+    {{ form_errors(form.nbParticipants) }}
+</div>
+<label>
+    Date
+</label>
+<div class="form-group row">
+
+
+    <div class="col-sm-4">
+        {{ form_widget(form.dateTournoi) }}
+        {{ form_errors(form.dateTournoi) }}
+    </div>
+    <div class="col-sm-1">
+        heure
+
+    </div>
+    <div class="col-sm-1">
+        {{ form_widget(form.heure) }}
+        {{ form_errors(form.heure) }}
+
+    </div>
+
+</div>
+<div class="col-sm">
+    Resultat
+
+</div>
+<div class="col-sm-1">
+    {{ form_widget(form.resultatTournoi,{'attr':{'class':'form-control'}}) }}
+    {{ form_errors(form.resultatTournoi) }}
+
+</div>
+
+<div class="form-group">
+    <label>
+        Image
+    </label>
+    {{ form_widget(form.imageTournoi) }}
+    {{ form_errors(form.imageTournoi) }}
+
+</div>
+{{ form_widget(form.save,{'attr':{'class':'btn btn-sm btn-success'}}) }}
+
+                                                    {{ form_end(form) }}

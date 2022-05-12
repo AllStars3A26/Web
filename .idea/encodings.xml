@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/config/mailer.yaml" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/Service/TokenGenerator.php" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/templates/email/password-reset.html.twig" charset="windows-1252" />
+  </component>
+</project>

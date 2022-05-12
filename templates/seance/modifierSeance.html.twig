@@ -1,20 +1,71 @@
+{% extends 'basegeneral.html.twig' %}
 {% block body %}
-{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title"><b>Modifier une séance<b></h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
 
-{{ form_errors(form.dateSeance) }}
-{{ form_label(form.dateSeance,"date de la séance") }}
-{{ form_widget(form.dateSeance)}}
-{{ form_errors(form.heureSeance) }}
-{{ form_label(form.heureSeance,"heure de la séance") }}
-{{ form_widget(form.heureSeance)}}
-{{ form_errors(form.nomT) }}
-{{ form_label(form.nomT,"nom de la séance") }}
-{{ form_widget(form.nomT)}}
-{{ form_errors(form.nomE) }}
-{{ form_label(form.nomE,"nom de l'entraineur") }}
-{{ form_widget(form.nomE)}}
-{{ form_errors(form.nbParticipants) }}
-{{ form_label(form.nbParticipants,"nbParticipants") }}
-{{ form_widget(form.nbParticipants)}}
-{{ form_end(form) }}
+                {{ form_start(formSeanceM,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+                <div class="card-body">
+                  
+                 
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Date de la séance </label>
+                    {{ form_widget(formSeanceM.dateSeance) }}
+                    {{ form_errors(formSeanceM.dateSeance, {'attr': {"class":"mb-0"}}) }}
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Heure de la séance </label>
+                    {{ form_widget(formSeanceM.heureSeance) }}
+                    {{ form_errors(formSeanceM.heureSeance, {'attr': {"class":"mb-0"}}) }}
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Nom de la séance </label>
+                    {{ form_widget(formSeanceM.nomT, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(formSeanceM.nomT, {'attr': {"class":"mb-0"}}) }}
+                  </div>
+                   <div class="form-group">
+                    <label for="exampleInputPassword1">Nom de l'entraineur </label>
+                    {{ form_widget(formSeanceM.nomE, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(formSeanceM.nomE, {'attr': {"class":"mb-0"}}) }}
+                  </div>
+                  
+               
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                 {{ form_widget(formSeanceM.Modifier, {'attr': {'class': 'btn btn-primary'}}) }}
+                </div>
+             {{ form_end(formSeanceM) }}
+            </div>
+            <!-- /.card -->
+
+          
+
+          </div>
+
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
 {% endblock %}
+
+

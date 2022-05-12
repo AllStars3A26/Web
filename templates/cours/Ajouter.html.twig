@@ -1,5 +1,75 @@
+{% extends 'basegeneral.html.twig' %}
+{% block body %}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Ajouter un cours</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
 
-{%extends 'base-back.html.twig'%}
-{%block body%}
-{{form(form)}}
+                {{ form_start(formCours,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+                <div class="card-body">
+                  
+                 
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Titre </label>
+                    {{ form_widget(formCours.titre, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(formCours.titre, {'attr': {"class":"mb-0"}}) }}
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Nom de l'entraineur </label>
+                    {{ form_widget(formCours.nome, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(formCours.nome, {'attr': {"class":"mb-0"}}) }}
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Type </label>
+                    {{ form_widget(formCours.type, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(formCours.type, {'attr': {"class":"mb-0"}}) }}
+                  </div>
+                   <div class="form-group">
+                    <label for="exampleInputPassword1">Valeur </label>
+                    {{ form_widget(formCours.imc, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(formCours.imc, {'attr': {"class":"mb-0"}}) }}
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Nombre d'heure </label>
+                    {{ form_widget(formCours.nbHeure) }}
+                    {{ form_errors(formCours.nbHeure, {'attr': {"class":"mb-0"}}) }}
+                  </div>
+               
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                 {{ form_widget(formCours.Ajouter, {'attr': {'class': 'btn btn-primary'}}) }}
+                </div>
+             {{ form_end(formCours) }}
+            </div>
+            <!-- /.card -->
+
+          
+
+          </div>
+
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
 {% endblock %}
+
+

@@ -1,0 +1,28 @@
+{% extends 'front/client.html.twig' %}
+{% block body %}
+<section id="contant" class="contant main-heading team">
+    <div class="row">
+        <div class="container">
+            {% for tournoi in tournois %}
+            <div class="col-md-3 column">
+                <div class="card">
+                    <img class="img-responsive" src="{{asset('uploads/') ~ tournoi.imageTournoi}}" alt="John" style="width:100%">
+                    <div class="">
+                        <h4>{{ tournoi.nomTournoi }}</h4>
+                        <p class="title">{{ tournoi.dateTournoi | date('Y-m-d') }}</p>
+                        <p>
+                            <a href="{{ path('qr', {'id': tournoi.idTournoi}) }}">
+                                <button class="fag-btn-outline">info</button>
+                            </a>
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+        {{ knp_pagination_render(tournois) }}
+    </div>
+</section>
+{% endblock %}

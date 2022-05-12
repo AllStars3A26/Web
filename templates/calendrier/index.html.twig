@@ -1,0 +1,56 @@
+{% extends 'basegeneral.html.twig' %}
+
+{% block body %}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css" 
+        integrity="sha256-5veQuRbWaECuYxwap/IOE/DAwNxgm4ikX7nrgsqYp88="
+        crossorigin="anonymous">
+
+
+  <style>
+    #calendrier{
+        width: 80%;
+        margin: auto;
+    }
+    </style>
+
+
+    <!-- Calendar -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js" 
+        integrity="sha256-YicH/8aE660iEnJtgll3vT54dJApy3XkYmqNfGVFEzA=" 
+        crossorigin="anonymous">
+    </script>
+
+    <script>
+        window.onload = () => {
+        //document.addEventListener('DOMContentLoaded', function() {
+        let calendarElt = document.querySelector("#calendrier");
+        let calendar = new FullCalendar.Calendar(calendarElt, {
+          initialView: 'dayGridMonth',
+
+          locale: 'fr',
+            timeZone: 'Europe/Paris',
+            headerToolbar: {
+                start: 'prev,next today',
+                center: 'title',
+                end: 'dayGridMonth,timeGridWeek'
+            },
+
+            events: {{ data|raw }}  
+        })
+
+        calendar.render();
+      };
+        
+    </script>
+
+
+
+    <div id="calendrier">
+
+    </div>
+    <div class="card-footer">
+    
+                <a href="{{ path('listFonction') }}" type="button" class="btn btn-secondary" >Retour à la Liste</a>
+    </div>
+    {% endblock  %}

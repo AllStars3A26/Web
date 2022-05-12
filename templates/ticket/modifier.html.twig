@@ -1,0 +1,15 @@
+{% extends 'baseback.html.twig' %}
+{% block body %}
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+{{ form_errors(form.libelle) }}
+{{ form_label(form.libelle,"nom du ticket") }}
+{{ form_widget(form.libelle)}}
+{{ form_errors(form.prix) }}
+{{ form_label(form.prix,"prix du ticket") }}
+{{ form_widget(form.prix)}}
+{{ form_errors(form.type) }}
+{{ form_label(form.type,"type") }}
+{{ form_widget(form.type)}}
+{{ form_end(form) }}
+{% endblock %}

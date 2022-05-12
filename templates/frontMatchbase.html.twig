@@ -1,0 +1,71 @@
+{% extends 'front/client.html.twig' %}
+{% block body %}
+<section id="contant" class="contant main-heading team">
+    <div class="row">
+        <div class="container">
+            {% for match in matchs %}
+                <div class="ticket_dec2">
+                                <span class="ticket_date">
+                                  {% if ((date|date('m')==1)or(date|date('m')==3)or(date|date('m')==5)or(date|date('m')==7)or(date|date('m')==8)or(date|date('m')==10)or(date|date('m')==12)) %}
+                                   {%set type =31 %}
+                {% elseif (date|date('m')==2) %}
+                    {%set type =28 %}
+                {% else %}
+                    {%set type =30 %}
+
+                        {% endif %}
+
+                                    {% set y= match.dateMatch|date('Y') -date|date('Y')  %}
+                                    {% if ((date|date('m')>match.dateMatch|date('m')) and (match.dateMatch|date('Y') >date|date('Y'))) %}
+
+                                    {% set m= 12  - date|date('Y') +match.dateMatch|date('Y')  %}
+                                    {% set y= y-1  %}
+                                    {% endif  %}
+                                    {% if (date|date('m')<match.dateMatch|date('m')) %}
+
+                                        {% set m= match.dateMatch|date('m') - date|date('m')  %}
+
+                                    {% else %}
+                                        {% set m= 12- date|date('m') + match.dateMatch|date('m') %}
+                                    {% endif %}
+                                    {% if (date|date('d')<match.dateMatch|date('d')) %}
+
+                                        {% set d= type  - date|date('d') +match.dateMatch|date('d')  %}
+                                        {% set m= m-1  %}
+                                    {% else %}
+                                        {% set d=  date|date('d') - match.dateMatch|date('d') %}
+                                    {% endif %}
+                                    <b>{{ d ~'j'}}</b>
+                                    <small>{{ y~'Y'~m~'m' }}</small>
+                                </span>
+                    <div class="kf_opponents_wrap2">
+                        <div class="kf_opponents_wrap">
+                            <p>Match</p>
+                            <div class="kf_opponents_dec">
+
+                                <div class="text">
+                                    <h6><a href="#">{{ match.idEquipe1 }}</a></h6>
+                                    <span class="icon_tag"><i class="fa fa-calendar-plus-o"></i>{{ match.dateMatch ? match.dateMatch|date('Y-m-d') : '' }}</span>
+                                </div>
+                            </div>
+                            <div class="kf_opponents_gols">
+                                <h5>vs</h5>
+                            </div>
+                            <div class="kf_opponents_dec span_right">
+
+                                <div class="text">
+                                    <h6><a href="#">{{ match.idEquipe2 }}</a></h6>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ticket_button">
+                            <button>View Details</button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

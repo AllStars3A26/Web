@@ -1,0 +1,52 @@
+{% extends 'basegeneral.html.twig' %}
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+
+    <div class="example-wrapper">
+        <table class="table table-info">
+            <thead>
+            <th>nom</th>
+            <th>prix </th>
+            <th>image</th>
+            <th>quantité </th>
+            <th>description</th>
+            <th> Modification</th>
+            <th> supression </th>
+            <th> pdf </th>
+            </thead>
+            <tbody>
+            {%  for t in prod %}
+                <tr>
+                    <td>{{ t.nomprod }}</td>
+                    <td> {{ t.prixprod }} </td>
+                    <td> {{ t.imgprod }} </td>
+                    <td> {{ t.quantprod }} </td>
+                    <td> {{ t.descprod }} </td>
+                    <td>
+                        <a href="{{ path('modifier_prod',{'id':t.idprod}) }}">Modifier</a>
+                    </td>
+
+                    <td>
+                        <a href="{{ path('supp_prod',{'id':t.idprod}) }}">supprimer</a>
+                    </td>
+
+                    <td>
+                        <a href="{{ path('pdfbox2') }}"class="btn btn-primary">Save As PDF</a>
+                    </td>
+
+                    <td>
+                        <a href="{{ path('qrcode_Produit',{'id':t.idprod}) }}">
+                            <button class="btn btn-sm btn-outline-dark">QRcode</button>
+                        </a>
+                    </td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

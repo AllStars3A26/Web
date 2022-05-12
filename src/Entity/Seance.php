@@ -73,12 +73,31 @@ class Seance
     private $nbParticipants;
 
     /**
-     * @var int
+     * @var \Cours
      *
-     * @ORM\Column(name="cours_cp",type="integer",nullable=false)
+     * @ORM\ManyToOne(targetEntity="Cours")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="cours_cp", referencedColumnName="id_cours")
+     * })
      */
     private $coursCp;
-  
+    /**
+     * 
+     * @ORM\Column(name="borderColor",  type="string", length=20)
+     */
+    private $borderColor;
+    /**
+     *
+     * @ORM\Column(name="textColor",   type="string", length=20)
+     */
+    private $textColor;
+    /**
+     *
+     * @ORM\Column(name="backgroundColor",   type="string", length=20)
+     */
+    private $backgroundColor;
+   
+ 
 
     public function getIdSeance(): ?int
     {
@@ -145,17 +164,54 @@ class Seance
         return $this;
     }
 
-    public function getCoursCp(): ?int
+    public function getCoursCp(): ?Cours
     {
         return $this->coursCp;
     }
 
-    public function setCoursCp(?int $coursCp): self
+    public function setCoursCp(?Cours $coursCp): self
     {
         $this->coursCp = $coursCp;
 
         return $this;
     }
+    public function getborderColor(): ?String
+    {
+        return $this->borderColor;
+    }
+
+    public function setborderColor(String $borderColor): self
+    {
+        $this->borderColor = $borderColor;
+
+        return $this;
+    }
+    
+    public function gettextColor(): ?String
+    {
+        return $this->textColor;
+    }
+
+    public function settextColor(String $textColor): self
+    {
+        $this->textColor = $textColor;
+
+        return $this;
+    }
+
+    public function getbackgroundColor(): ?String
+    {
+        return $this->backgroundColor;
+    }
+
+    public function setbackgroundColor(String $backgroundColor): self
+    {
+        $this->backgroundColor = $backgroundColor;
+
+        return $this;
+    }
+   
+  
   
 
 }

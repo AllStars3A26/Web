@@ -1,0 +1,26 @@
+{% extends 'basegeneral.html.twig' %}
+{% block body %}
+<table border="1">
+   <tr>
+
+        <td>libelle</td>
+        <td>Type</td>
+        
+
+    </tr>
+    {% for c in Evenement %}
+        <tr>
+            
+            <td>{{ c.libelle }}</td>
+            <td>{{ c.type}}</td>
+            
+            
+             
+           
+            <td> <a href="{{ path('supprimerEvenement',{'id':c.id}) }}">Delete</a> </td>
+            <td> <a href="{{ path('modifierEvenement',{'id':c.id}) }}">Modifier</a> </td>
+            <td> <a href="{{ path('ajouterEvenement',{'id':c.id}) }}">Ajouter une Evenement</a> </td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

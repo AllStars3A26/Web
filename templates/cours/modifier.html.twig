@@ -1,20 +1,75 @@
+{% extends 'baseback.html.twig' %}
 {% block body %}
-{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Modifier un cours</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
 
-{{ form_errors(form.titre) }}
-{{ form_label(form.titre,"nom du cours") }}
-{{ form_widget(form.titre)}}
-{{ form_errors(form.nome) }}
-{{ form_label(form.nome,"nom de l'entraineur") }}
-{{ form_widget(form.nome)}}
-{{ form_errors(form.type) }}
-{{ form_label(form.type,"type") }}
-{{ form_widget(form.type)}}
-{{ form_errors(form.imc) }}
-{{ form_label(form.imc,"valeur") }}
-{{ form_widget(form.imc)}}
-{{ form_errors(form.nbHeure) }}
-{{ form_label(form.nbHeure,"nbHeure") }}
-{{ form_widget(form.nbHeure)}}
-{{ form_end(form) }}
+                {{ form_start(formCoursM,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+                <div class="card-body">
+                  
+                 
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Titre </label>
+                    {{ form_widget(formCoursM.titre, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(formCoursM.titre, {'attr': {"class":"mb-0"}}) }}
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Nom de l'entraineur </label>
+                    {{ form_widget(formCoursM.nome, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(formCoursM.nome, {'attr': {"class":"mb-0"}}) }}
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Type </label>
+                    {{ form_widget(formCoursM.type, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(formCoursM.type, {'attr': {"class":"mb-0"}}) }}
+                  </div>
+                   <div class="form-group">
+                    <label for="exampleInputPassword1">Valeur </label>
+                    {{ form_widget(formCoursM.imc, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(formCoursM.imc, {'attr': {"class":"mb-0"}}) }}
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Nombre d'heure </label>
+                    {{ form_widget(formCoursM.nbHeure) }}
+                    {{ form_errors(formCoursM.nbHeure, {'attr': {"class":"mb-0"}}) }}
+                  </div>
+               
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                 {{ form_widget(formCoursM.Modifier, {'attr': {'class': 'btn btn-primary'}}) }}
+                </div>
+             {{ form_end(formCoursM) }}
+            </div>
+            <!-- /.card -->
+
+          
+
+          </div>
+
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
 {% endblock %}
+
+

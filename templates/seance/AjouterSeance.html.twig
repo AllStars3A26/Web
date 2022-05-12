@@ -1,1 +1,71 @@
-{{form(form)}}
+{% extends 'baseback.html.twig' %}
+{% block body %}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Ajouter une séance</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+
+                {{ form_start(formSeance,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+                <div class="card-body">
+                  
+                 
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Date de la séance </label>
+                    {{ form_widget(formSeance.dateSeance) }}
+                    {{ form_errors(formSeance.dateSeance, {'attr': {"class":"mb-0"}}) }}
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Heure de la séance </label>
+                    {{ form_widget(formSeance.heureSeance) }}
+                    {{ form_errors(formSeance.heureSeance, {'attr': {"class":"mb-0"}}) }}
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Nom de la séance </label>
+                    {{ form_widget(formSeance.nomT, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(formSeance.nomT, {'attr': {"class":"mb-0"}}) }}
+                  </div>
+                   <div class="form-group">
+                    <label for="exampleInputPassword1">Nom de l'entraineur </label>
+                    {{ form_widget(formSeance.nomE, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(formSeance.nomE, {'attr': {"class":"mb-0"}}) }}
+                  </div>
+                  
+               
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                 {{ form_widget(formSeance.Ajouter, {'attr': {'class': 'btn btn-primary'}}) }}
+                </div>
+             {{ form_end(formSeance) }}
+            </div>
+            <!-- /.card -->
+
+          
+
+          </div>
+
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
+{% endblock %}
+
+

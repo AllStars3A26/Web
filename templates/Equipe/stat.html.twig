@@ -1,0 +1,24 @@
+{% extends 'baseback.html.twig' %}
+{% block body %}
+    <section id="container">
+        <section id="main-content">
+            <section class="wrapper">
+                <h3><i class="fa fa-angle-right"></i> Stats :</h3>
+                <div class="row mt">
+                    <div class="col-md-12">
+                        <div class="content-panel">
+                            <div id="div_chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </section>
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    {{ gc_draw(piechart, 'div_chart') }}
+</script>
+
+{% endblock %}

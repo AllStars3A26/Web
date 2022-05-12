@@ -8,6 +8,9 @@ use App\Repository\SeanceRepository;
 use App\Entity\Cours;
 use App\Form\CoursType;
 use App\Repository\CoursRepository;
+use \Twilio\Rest\Client;
+
+
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,8 +21,15 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Validator\Constraints\DateTime;
+
+
+
+
+
 class SeanceController extends AbstractController
 {
+   
     /**
      * @Route("/seance", name="app_seance")
      */
@@ -32,19 +42,37 @@ class SeanceController extends AbstractController
     /**
      * @Route("/AfficherSeance/{id}", name="AfficherSeance")
      */
+    
     public function AfficherSeance( $id)
-    {
-        $Seance = $this->getDoctrine()->getRepository(Seance::class)->findOneBycourscp($id);
+    {$cours=$this->getDoctrine()->getRepository(Cours::class)->find($id);
+        
+        
+        $Seance = $this->getDoctrine()->getRepository(Seance::class)->findBycoursCp($cours->getIdCours());
+   
+        
+        
+
+
       
         return $this->render('seance/listseance.html.twig', ["Seances" => $Seance]);
+    }
+       /**
+     * @Route("/AfficherSeanceFront/{id}", name="AfficherSeanceFront")
+     */
+    public function AfficherSeanceFront( $id)
+    {$cours=$this->getDoctrine()->getRepository(Cours::class)->find($id);
+        
+        $Seance = $this->getDoctrine()->getRepository(Seance::class)->findBycoursCp($cours->getIdCours());
+      
+        return $this->render('seance/listseancefront.html.twig', ["Seances" => $Seance]);
     }
 /**
      * @Route("/ajouterSeance/{id}", name="ajouterSeance")
      */
     public function ajouterSeance(Request $request,$id)
-    {
+    {$cours=$this->getDoctrine()->getRepository(Cours::class)->find($id);
         $Seance = new Seance();
-        $Seance->setCoursCp($id);
+        $Seance->setCoursCp($cours);
         $form = $this->createForm(SeanceType::class, $Seance);
         
         $form->add("Ajouter", SubmitType::class);
@@ -56,19 +84,28 @@ class SeanceController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('listFonction');
         }
-        return $this->render("seance/AjouterSeance.html.twig", array('form' => $form->createView()));
+        return $this->render("seance/AjouterSeance.html.twig", array('formSeance' => $form->createView()));
     }
      /**
      * @Route("/supprimerSeance/{id}", name="supprimerSeance")
      */
     public function supprimerSeance($id)
-    {
+    { 
         $Seance = $this->getDoctrine()->getRepository(Seance::class)->find($id);
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($Seance);
-        $em->flush();
-        return $this->redirectToRoute("listSeance");
+        if($Seance->getNbParticipants()>=5)
+        {
+            echo "<script>alert('Vous ne pouvez supprimer une séance ayant 5 participants ou plus ! ');</script>";
+          
+        }
+        else{
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($Seance);
+            $em->flush();
+            return $this->redirectToRoute("listFonction");}
+            return $this->redirectToRoute("listFonction");
+            
     } 
+
 
       /**
      * @Route("/modifierSeance/{id}", name="modifierSeance")
@@ -84,7 +121,51 @@ class SeanceController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('listFonction');
         }
-        return $this->render("Seance/modifier.html.twig", array('form' => $form->createView()));
+        return $this->render("Seance/modifierSeance.html.twig", array('formSeanceM' => $form->createView()));
     }
+     /**
+     * @Route("/participerSeance/{id}", name="participerSeance")
+     */
+    function Participer(Request $request, $id,\Swift_Mailer $mailer)
+{ $Seance = $this->getDoctrine()->getRepository(Seance::class)->find($id);
+    $Seance->setNbParticipants($Seance->getNbParticipants() + 1);
+    $this->getDoctrine()->getManager()->flush();
+    
+    $message = (new \Swift_Message('Confirmation de participation'))
+    ->setFrom('skanderhelmisportify@gmail.com')
+    ->setContentType("text/html")
+    ->setTo('emnatrabelsi611@gmail.com')
+    //->setTo('$user->getMail()')
+    ->setBody(
+     "<p style='color: black;'> Votre demande de participation au cours est confirmée</p>"
+
+    );
+    
+    $mailer->send($message);
+    $sid = "AC67f52567b92218cc3d58ce3232ad4fff"; // Your Account SID from www.twilio.com/console
+$token = "ce46bde5fe24e5e18e165c001d2050d9"; // Your Auth Token from www.twilio.com/console
+
+$client = new Client($sid, $token);
+$message = $client->messages->create(
+
+  '+21620742823', // Text this number
+  [
+    'from' => '+19379187956', // From a valid Twilio number
+    'body' => ' Votre demande de participation au cours est confirmée'
+  ]
+);
+print $message->sid;
+echo '<script language="javascript">';
+echo 'alert("Participation faite avec succès, vous recevrez sous peu un SMS ainsi qu un email qui confirmera votre participatipation")';
+echo '</script>';
+
+
+
+ 
+
+ 
+    return $this->redirectToRoute('listFonction');
+
+}
 
 }

@@ -25,7 +25,20 @@ class EquipeType extends AbstractType
                         )
             ->add('descriptionEquipe')
             ->add('mailEquipe',EmailType::class)
-            ->add('nbreJoueur',IntegerType::class)
+            ->add('nbreJoueur',ChoiceType::class,[
+                'choices' => [
+                    '5' => 5,
+                    '6' => 6,
+                    '7' => 7,
+                    '8' => 8,
+                    '9' => 9,
+                    '10' => 10,
+                    '11' => 11,
+                    '12' => 12,
+                    "13" => 13
+                ]
+                ]
+            )
         ;
     }
 

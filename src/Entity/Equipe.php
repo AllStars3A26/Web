@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EquipeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -46,8 +48,19 @@ class Equipe
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\NotBlank(message="Veuillez ajouter nombre de joueur")
+     * @Assert\Choice({5,6,7,8,9,10,11,12,13})
      */
     private $nbre_joueur;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Terrain::class, mappedBy="id_equipe")
+     */
+    private $terrains;
+
+    public function __construct()
+    {
+        $this->terrains = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -110,6 +123,36 @@ class Equipe
     public function setNbreJoueur(?int $nbre_joueur): self
     {
         $this->nbre_joueur = $nbre_joueur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Terrain>
+     */
+    public function getTerrains(): Collection
+    {
+        return $this->terrains;
+    }
+
+    public function addTerrain(Terrain $terrain): self
+    {
+        if (!$this->terrains->contains($terrain)) {
+            $this->terrains[] = $terrain;
+            $terrain->setIdEquipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTerrain(Terrain $terrain): self
+    {
+        if ($this->terrains->removeElement($terrain)) {
+            // set the owning side to null (unless already changed)
+            if ($terrain->getIdEquipe() === $this) {
+                $terrain->setIdEquipe(null);
+            }
+        }
 
         return $this;
     }
